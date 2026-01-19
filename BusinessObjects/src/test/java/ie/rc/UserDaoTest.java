@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDaoTest {
 
@@ -22,13 +22,11 @@ public class UserDaoTest {
 
     @BeforeEach
     public void initialise() throws SQLException {
-        System.out.println("initialise() called");
         conn = DriverManager.getConnection(url);
         dao = new UserDao(conn);
     }
     @AfterEach
     public void tidyup() throws SQLException {
-        System.out.println("tidyup() called");
         conn.close();
     }
     @Test
@@ -36,7 +34,6 @@ public class UserDaoTest {
 
         assertNotNull(conn);
         assertNotNull(dao);
-        conn.close();
     }
 
     @Test
@@ -44,7 +41,43 @@ public class UserDaoTest {
         var userToAdd = new User(-1, "Wendy", "wendy@gmail.com", true);
         var addedUser = dao.add(userToAdd);
         assertNotNull(addedUser.id());
-        conn.close();
+
+        // tidy up the database
+        dao.delete(addedUser.id());
     }
 
+    @Test
+    public void deleteUser() {
+
+        var userToAdd = new User(-1, "DELETE ME", "delete.me@gmail.com", true);
+        var addedUser = dao.add(userToAdd);
+
+        int n = dao.delete(addedUser.id());
+        assertNotEquals(n, 0);
+    }
+
+    @Test
+    public void getByIdTest() {
+
+        var users = dao.getAll();
+        var userToFind = users.get(0);
+        var foundUser = dao.getById(userToFind.id());
+
+        assertEquals(userToFind, foundUser);
+    }
+
+    @Test
+    public void updateUserTest() {
+        // get the first user
+        var firstUser = dao.getAll().get(0);
+
+        var userToUpdate = new User(firstUser.id(),
+                                    firstUser.name(),
+                                    firstUser.email(),
+                                    !firstUser.active());
+        dao.update(userToUpdate);
+        var foundUser = dao.getById(firstUser.id());
+        assertNotEquals(firstUser.active(), foundUser.active());
+    }
 }
+

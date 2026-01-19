@@ -26,7 +26,7 @@ public class App
         for (User user: users) {
             System.out.println(user);
         }
-
+/*
         User userToAdd = new User(-1,
                             "Xavier",
                             "xavier@gmail.com",
@@ -35,6 +35,7 @@ public class App
         User addedUser = dao.add(userToAdd);
 
         System.out.println(addedUser);
+*/
 
         conn.close();
 

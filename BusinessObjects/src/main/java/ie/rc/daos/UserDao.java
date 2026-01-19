@@ -71,14 +71,65 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
-    public void delete(int id) {
+    public int delete(int id) {
         // delete user with id
-        throw new UnsupportedOperationException("TBD");
-    }
-    public User update(User userToUpdate) {
-        throw new UnsupportedOperationException("TBD");
+        var sql = "DELETE FROM users WHERE id=" + id;
+
+        try {
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(sql);
+
+            /*if (n > 0) {
+                // everything ok
+            } else {
+                // record not found
+            }*/
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     public User getById(int id) {
-        throw new UnsupportedOperationException("TBD");
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM users WHERE id="+id;
+
+            var rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                var name = rs.getString("name");
+                var email = rs.getString("email");
+                var active = rs.getBoolean("active");
+                return new User(id, name, email, active);
+            } else {
+                //  is this an error???
+                // TODO - revisit this later on
+                // you can make a strong case for throwing an exception
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public User update(User userToUpdate) {
+        String sql = """
+                UPDATE users
+                SET name = '%s', 
+                email = '%s', 
+                active = '%d'
+                WHERE id = %d
+                """
+                .formatted(
+                        userToUpdate.name(),
+                        userToUpdate.email(),
+                        (userToUpdate.active() ? 1 : 0),
+                        userToUpdate.id());
+
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            return userToUpdate;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
