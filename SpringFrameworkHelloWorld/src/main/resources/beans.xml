@@ -5,7 +5,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="java.lang.String">
-        <constructor-arg value="Is this working?"/>
+    <bean id="mainMessage" class="java.lang.String">
+        <constructor-arg value="Spring Framework is working"/>
+    </bean>
+
+    <bean id="secondMessage" class="java.lang.String">
+        <constructor-arg value="String no 2"/>
+    </bean>
+
+    <bean id="user" class="ie.rc.User">
+        <constructor-arg value="1" name="id"/>
+        <constructor-arg value="Fred" name="name"/>
+        <constructor-arg value="fred@gmail.com" name="email"/>
+        <constructor-arg value="false" name="active"/>
+    </bean>
+
+    <bean class="ie.rc.ShowUser">
+        <constructor-arg ref="user"/>
     </bean>
 </beans>
