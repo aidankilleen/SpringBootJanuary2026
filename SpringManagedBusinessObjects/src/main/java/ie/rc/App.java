@@ -3,6 +3,7 @@ package ie.rc;
 import ie.rc.daos.SqlUserDao;
 import ie.rc.daos.UserDao;
 import ie.rc.models.User;
+import ie.rc.services.GeneralService;
 import ie.rc.services.UserManagerService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -17,8 +18,20 @@ import java.sql.SQLException;
 public class App 
 {
     public static void main( String[] args ) throws SQLException {
-        System.out.println( "Spring Managed Business Objects" );
         var ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        var env = ctx.getEnvironment();
+
+        String title = env.getProperty("app.title");
+        System.out.println(title);
+
+        String author = env.getProperty("app.author",
+                                "Aidan Killeen (default)");
+        System.out.println(author);
+
+        String url = env.getProperty("database.url");
+        System.out.println(url);
+
         String message = ctx.getBean(String.class);
         System.out.println(message);
 
@@ -45,5 +58,10 @@ public class App
         for (User user:users) {
             System.out.println(user);
         }
+
+
+        GeneralService gs = ctx.getBean(GeneralService.class);
+        gs.displayMessage();
+
     }
 }
