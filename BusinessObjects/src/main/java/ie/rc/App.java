@@ -1,5 +1,7 @@
 package ie.rc;
 
+import ie.rc.daos.InMemoryUserDao;
+import ie.rc.daos.SqlUserDao;
 import ie.rc.daos.UserDao;
 import ie.rc.models.User;
 
@@ -17,15 +19,19 @@ public class App
 
         System.out.println( "Business Objects" );
 
-        String url = "jdbc:sqlite:C:\\work\\training\\java\\users.db";
-        Connection conn = DriverManager.getConnection(url);
-        UserDao dao = new UserDao(conn);
+        //String url = "jdbc:sqlite:C:\\work\\training\\java\\users.db";
+        //Connection conn = DriverManager.getConnection(url);
+        UserDao dao = new InMemoryUserDao();
 
         var users = dao.getAll();
 
         for (User user: users) {
             System.out.println(user);
         }
+
+        User u = dao.getById(102);
+
+        System.out.println(u);
 /*
         User userToAdd = new User(-1,
                             "Xavier",
@@ -37,7 +43,7 @@ public class App
         System.out.println(addedUser);
 */
 
-        conn.close();
+        //conn.close();
 
     }
 }

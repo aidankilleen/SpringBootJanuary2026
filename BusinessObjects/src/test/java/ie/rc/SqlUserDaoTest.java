@@ -1,9 +1,9 @@
 package ie.rc;
 
+import ie.rc.daos.SqlUserDao;
 import ie.rc.daos.UserDao;
 import ie.rc.models.User;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserDaoTest {
+public class SqlUserDaoTest {
 
     String url = "jdbc:sqlite:C:\\work\\training\\java\\users.db";
 
@@ -23,7 +23,7 @@ public class UserDaoTest {
     @BeforeEach
     public void initialise() throws SQLException {
         conn = DriverManager.getConnection(url);
-        dao = new UserDao(conn);
+        dao = new SqlUserDao(conn);
     }
     @AfterEach
     public void tidyup() throws SQLException {
