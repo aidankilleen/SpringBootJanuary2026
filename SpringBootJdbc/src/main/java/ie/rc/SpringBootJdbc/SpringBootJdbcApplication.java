@@ -1,5 +1,6 @@
 package ie.rc.SpringBootJdbc;
 
+import ie.rc.SpringBootJdbc.daos.UserDao;
 import ie.rc.SpringBootJdbc.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,10 +23,14 @@ public class SpringBootJdbcApplication implements CommandLineRunner {
 	@Autowired
 	JdbcTemplate jdbc;
 
+	@Autowired
+	UserDao dao;
+
 	public SpringBootJdbcApplication(@Value("${spring.application.name}") String appName){
 		this.appName = appName;
 	}
 
+	/*
 	private static RowMapper<User> USER_MAPPER = new RowMapper<User>(){
 		@Nullable
 		@Override
@@ -37,6 +42,8 @@ public class SpringBootJdbcApplication implements CommandLineRunner {
 					rs.getBoolean("active"));
 		}
 	};
+
+	 */
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootJdbcApplication.class, args);
@@ -50,6 +57,24 @@ public class SpringBootJdbcApplication implements CommandLineRunner {
 
 		System.out.println(appName);
 
+		var users = dao.getAll();
+		for (var user: users) {
+			System.out.println(user);
+		}
+
+		var u = dao.getById(3);
+		System.out.println(u);
+
+		try {
+			u = dao.getById(999);
+			System.out.println(u);
+
+		} catch(IllegalArgumentException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+
+		/*
 		String sql = "SELECT COUNT(*) FROM users";
 		int count = jdbc.queryForObject(sql, Integer.class);
 		System.out.printf("Record Count=%d\n", count);
@@ -70,6 +95,9 @@ public class SpringBootJdbcApplication implements CommandLineRunner {
 
 		sql = "INSERT INTO users (name, email, active) VALUES('','',0)";
 		jdbc.execute(sql);
+
+
+		 */
 
 	}
 }
