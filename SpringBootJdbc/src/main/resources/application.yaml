@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: Spring Boot Jdbc
+  datasource:
+    url: jdbc:sqlite:C:\work\training\java\users.db
+    driver-class-name: org.sqlite.JDBC
+
+

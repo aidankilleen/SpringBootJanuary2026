@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: SpringBootHelloWorld
+app:
+  database:
+    url: jdbc:sqlite:C:\\work\\training\\java\\users.db
+
