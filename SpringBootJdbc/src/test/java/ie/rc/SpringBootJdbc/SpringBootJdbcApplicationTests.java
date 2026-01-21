@@ -87,10 +87,4 @@ class SpringBootJdbcApplicationTests {
 		// tidy up after the test
 		dao.delete(addedUser.id());
 	}
-
-
-
-
-
-
 }
