@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 th:text="${title}"/>
+
+    Name:<span th:text="${user.name}"/>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="u:${users}">
+                <td th:text="${u.id}"/>
+                <td th:text="${u.name}"/>
+                <td th:text="${u.email}"/>
+                <td th:text="${u.active ? 'Active' : 'Inactive'}"/>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>

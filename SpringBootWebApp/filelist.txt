@@ -1,0 +1,47 @@
+ Volume in drive C is Windows
+ Volume Serial Number is 1264-D4C9
+
+ Directory of C:\work\training\java\SpringBootJanuary2026\SpringBootWebApp\src\main\resources
+
+22/01/2026  12:25    <DIR>          .
+22/01/2026  09:41    <DIR>          ..
+22/01/2026  12:25               221 application.yaml
+22/01/2026  12:39    <DIR>          static
+22/01/2026  09:40    <DIR>          templates
+               1 File(s)            221 bytes
+
+ Directory of C:\work\training\java\SpringBootJanuary2026\SpringBootWebApp\src\main\resources\static
+
+22/01/2026  12:39    <DIR>          .
+22/01/2026  12:25    <DIR>          ..
+22/01/2026  12:48    <DIR>          error
+22/01/2026  12:11               168 error.html
+22/01/2026  10:13    <DIR>          images
+22/01/2026  10:13               206 index.html
+22/01/2026  12:39               150 ok.html
+               3 File(s)            524 bytes
+
+ Directory of C:\work\training\java\SpringBootJanuary2026\SpringBootWebApp\src\main\resources\static\error
+
+22/01/2026  12:48    <DIR>          .
+22/01/2026  12:39    <DIR>          ..
+22/01/2026  12:15               176 500.html
+22/01/2026  12:13               172 xxx404.html
+               2 File(s)            348 bytes
+
+ Directory of C:\work\training\java\SpringBootJanuary2026\SpringBootWebApp\src\main\resources\static\images
+
+22/01/2026  10:13    <DIR>          .
+22/01/2026  12:39    <DIR>          ..
+22/01/2026  10:13             7,259 cat.jpg
+               1 File(s)          7,259 bytes
+
+ Directory of C:\work\training\java\SpringBootJanuary2026\SpringBootWebApp\src\main\resources\templates
+
+22/01/2026  09:40    <DIR>          .
+22/01/2026  12:25    <DIR>          ..
+               0 File(s)              0 bytes
+
+     Total Files Listed:
+               7 File(s)          8,352 bytes
+              14 Dir(s)  825,266,454,528 bytes free
