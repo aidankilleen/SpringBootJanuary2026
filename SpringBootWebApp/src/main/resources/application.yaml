@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Spring Boot Web Application
+    title: Hello World Spring Web App
+app:
+  database:
+    url: jdbc:sqlite:C:\work\training\java\users.db
+server:
+  error:
+    whitelabel:
+      enabled: true
