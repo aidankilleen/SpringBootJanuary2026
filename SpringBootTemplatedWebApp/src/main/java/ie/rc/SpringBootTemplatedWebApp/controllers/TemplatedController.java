@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TemplatedController {
 
-    @Autowired
-    UserDao dao;
+
 
     @GetMapping("/templatedindex")
     String getTemplatedPage(Model model) {
@@ -21,24 +20,5 @@ public class TemplatedController {
         return "templatedindex";
     }
 
-    @GetMapping("/users")
-    String getUserPage(Model model) {
 
-        var users = dao.getAll();
-        System.out.println(users);
-
-        model.addAttribute("title",
-                "User List Page");
-
-        var user = new User(1, "Alice", "alice@gmail.com", true);
-        model.addAttribute("user", user);
-
-
-        model.addAttribute("users",users
-                );
-
-        return "users";
-
-
-    }
 }

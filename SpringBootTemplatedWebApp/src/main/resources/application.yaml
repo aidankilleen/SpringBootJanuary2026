@@ -2,5 +2,5 @@ spring:
   application:
     name: SpringBootTemplatedWebApp
   datasource:
-    url: jdbc:sqlite:C:\work\training\java\users.db
+    url: jdbc:sqlite:C:\work\training\java\production_users.db
     driver-class-name: org.sqlite.JDBC
