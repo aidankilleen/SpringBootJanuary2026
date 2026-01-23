@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>#
+
+    <h1 th:text="${title}"/>
+    <form th:action="@{/useradd}" th:object="${user}" method="post">
+
+        <input type="text" name="name" th:field="*{name}"/> <br>
+        <input type="text" name="email" th:field="*{email}"/> <br>
+        <input type="checkbox" name="name" th:field="*{active}"/> <br>
+
+        <input type="submit" value="submit">
+    </form>
+</head>
+<body>
+
+</body>
+</html>
