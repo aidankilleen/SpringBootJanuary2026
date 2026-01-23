@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="~{fragments/cssincludes :: commonHeader('User List')}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-    <h1 th:text="${title}"></h1>
+<div th:replace="~{fragments/header :: siteHeader}"></div>
 
     <p th:text="${message}"/>
     <form th:action="@{/deleteuser}" method="post">
 
         <input name="id" type="hidden" th:value="${user.id}"/><br>
 
-        <input type="submit" value="Delete" name="action"/>
-        <input type="submit" value="Cancel" name="action"/>
+        <input type="submit" value="Delete" name="action" class="btn btn-danger"/>
+        <input type="submit" value="Cancel" name="action" class="btn btn-secondary"/>
 
     </form>
 
+<div th:replace="~{fragments/header :: siteScripts}"></div>
 </body>
 </html>

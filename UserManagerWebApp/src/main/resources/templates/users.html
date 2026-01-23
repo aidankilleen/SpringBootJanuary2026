@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/cssincludes :: commonHeader('User List')}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1 th:text="${title}"/>
 
-    <a href="/useradd">Add User</a><br>
+
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <a href="/useradd" class="btn btn-success">Add User</a><br>
 
     <table class="table">
         <thead>
@@ -29,12 +31,14 @@
             <td th:text="${u.email}"/>
             <td th:text="${u.active ? 'Active' : 'Inactive'}"/>
             <td>
-                <a th:href="@{/deleteuser/{id}(id=${u.id})}">delete</a>
-                <a th:href="@{/edituser/{id}(id=${u.id})}">edit</a>
+                <a th:href="@{/deleteuser/{id}(id=${u.id})}" class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{/edituser/{id}(id=${u.id})}" class="btn btn-primary btn-sm">Edit</a>
             </td>
         </tr>
         </tbody>
 
     </table>
+
+    <div th:replace="~{fragments/header :: siteScripts}"></div>
 </body>
 </html>
