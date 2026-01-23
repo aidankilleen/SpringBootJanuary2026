@@ -5,9 +5,8 @@ import ie.rc.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -36,15 +35,63 @@ public class UserController {
     @GetMapping("/useradd")
     String showUserForm(Model model) {
 
+        User user = new User(-1,
+                "",
+                "",
+                false);
+
         model.addAttribute("title", "Add User");
+        model.addAttribute("user", user);
         return "userform";
     }
 
     @PostMapping("/useradd")
-    String processUserForm() {
+    String processUserForm(@ModelAttribute("user") User user,
+                           BindingResult bindingResult,
+                           Model model) {
+        User addedUser = dao.add(user);
 
-        System.out.println("Form submitted");
+        model.addAttribute("title", "User Added Successfully");
+        model.addAttribute("user", addedUser);
         return "useradded";
     }
+
+    @GetMapping("/deleteuser/{id}")
+    String showConfirmDelete(@PathVariable("id") int id, Model model) {
+        var user = dao.getById(id);
+        model.addAttribute("title", "Are you sure?");
+        model.addAttribute("user", user);
+        model.addAttribute("message", "Delete user %d".formatted(user.id()));
+        return "confirmdelete";
+    }
+
+    @PostMapping("/deleteuser")
+    String doDelete (@RequestParam int id,
+                     @RequestParam String action) {
+        if (action.equals("Delete")) {
+            dao.delete(id);
+        }
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edituser/{id}")
+    String showEditDialog(@PathVariable int id, Model model) {
+
+        User user = dao.getById(id);
+        model.addAttribute("title", "Edit User");
+        model.addAttribute("user", user);
+
+        return "edituserform";
+    }
+    @PostMapping("/edituser")
+    String doEdit(@ModelAttribute("user") User user,
+                  BindingResult bindingResult) {
+
+        dao.update(user);
+        return "redirect:/users";
+    }
+
+
+
 
 }

@@ -16,6 +16,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Active</th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,10 @@
             <td th:text="${u.name}"/>
             <td th:text="${u.email}"/>
             <td th:text="${u.active ? 'Active' : 'Inactive'}"/>
+            <td>
+                <a th:href="@{/deleteuser/{id}(id=${u.id})}">delete</a>
+                <a th:href="@{/edituser/{id}(id=${u.id})}">edit</a>
+            </td>
         </tr>
         </tbody>
 

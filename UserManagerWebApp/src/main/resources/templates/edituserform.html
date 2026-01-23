@@ -5,11 +5,12 @@
     <title>Title</title>#
 
     <h1 th:text="${title}"/>
-    <form th:action="@{/useradd}" th:object="${user}" method="post">
+    <form th:action="@{/edituser}" th:object="${user}" method="post">
+        <input type="text" name="id" th:field="*{id}" READONLY/> <br>
 
         <input type="text" name="name" th:field="*{name}"/> <br>
         <input type="text" name="email" th:field="*{email}"/> <br>
-        <input type="checkbox" name="name" th:field="*{active}"/> <br>
+        <input type="checkbox" name="active" th:field="*{active}"/> <br>
 
         <input type="submit" value="submit">
     </form>
