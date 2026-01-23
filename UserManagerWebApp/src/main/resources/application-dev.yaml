@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: UserManager Development
+  datasource:
+    url: jdbc:sqlite:C:\work\training\java\users.db
+    driver-class-name: org.sqlite.JDBC

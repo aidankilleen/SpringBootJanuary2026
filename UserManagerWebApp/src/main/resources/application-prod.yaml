@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: UserManager Production
+  datasource:
+    url: jdbc:sqlite:C:\work\training\java\production_users.db
+    driver-class-name: org.sqlite.JDBC

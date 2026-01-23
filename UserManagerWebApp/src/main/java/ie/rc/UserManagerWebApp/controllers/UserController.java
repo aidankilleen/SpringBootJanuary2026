@@ -2,7 +2,11 @@ package ie.rc.UserManagerWebApp.controllers;
 
 import ie.rc.daos.UserDao;
 import ie.rc.models.User;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,15 +15,26 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
+    @Value("${spring.application.name}")
+    String applicationName;
+
     @Autowired
     UserDao dao;
 
     @GetMapping("/users")
     String getPage(Model model) {
 
+        model.addAttribute("applicationName", applicationName);
+
         model.addAttribute("title", "User Manager");
         var users = dao.getAll();
         model.addAttribute("users", users);
+
+        log.info("User List retrieved successfully count={}", users.size());
+        //System.out.println(users);
         return "users";
     }
 
@@ -69,7 +84,9 @@ public class UserController {
     String doDelete (@RequestParam int id,
                      @RequestParam String action) {
         if (action.equals("Delete")) {
-            dao.delete(id);
+            if (dao.delete(id) != 1) {
+                log.error("No user found {}", id);
+            }
         }
         return "redirect:/users";
     }

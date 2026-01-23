@@ -1,10 +1,12 @@
 package ie.rc.UserManagerWebApp;
 
+import ie.rc.daos.InMemoryUserDao;
 import ie.rc.daos.SqlUserDao;
 import ie.rc.daos.UserDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,9 +24,16 @@ public class AppConfig {
     }
 
     @Bean
+    @Profile("prod")
     UserDao getDao() throws SQLException {
 
         return new SqlUserDao(getConnection());
+    }
+
+    @Bean
+    @Profile("dev")
+    UserDao getDevDao() {
+        return new InMemoryUserDao();
     }
 
 }
